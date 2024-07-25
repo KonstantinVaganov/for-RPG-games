@@ -37,6 +37,21 @@ class CharacterClass:
             print(f'Вы уже выбрали класс {self._character}a')
 
 
+class Weapon(CharacterClass):
+    _mage_sword = ['Dragon mace', 'Flaming mace']
+    _two_handed_sword = ['Dragon sword', 'Flaming sword']
+    _Bow = ['Dragon bow', 'Flaming bow']
+
+    def weapon_selection(self):
+        if self._character == 'Маг':
+            pass
+        elif self._character == 'Воин':
+            pass
+        elif self._character == 'Охотник':
+            pass
+        else:
+            print("Сначало нужно выбрать класс за кого хотите играть")
+
 p1 = CharacterClass('Sledov')
 p1.warrior()
 p1.hunter()
