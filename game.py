@@ -52,6 +52,7 @@ class Weapon(CharacterClass):
         else:
             print("Сначало нужно выбрать класс за кого хотите играть")
 
+
 p1 = CharacterClass('Sledov')
 p1.warrior()
 p1.hunter()
