@@ -1,3 +1,21 @@
+import random
+
+
+def choice_in_percent(percent, arg1, arg2):
+    ''' Для работы нужно импортировать модуль random.
+        percent = указать проценты
+        arg1 = с шансом (percent) выпадет arg1
+        arg2 = с шансом (100 - percent) выпадет arg2 '''
+    full = 100
+    result = []
+    full -= percent
+    for i in range(full):
+        result.append(arg2)
+    for j in range(percent):
+        result.append(arg1)
+    return random.choice(result)
+
+
 class CharacterClass:
     _character = None
     _stats = {}
@@ -46,26 +64,70 @@ class Weapon(CharacterClass):
             print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
             print('Шанс заточить оружие на +1 == 100%, на +2 шанс уже 95%.')
             print('С каждой заточкой шанс уменьшается на 5 % ')
-            print('Максимальная заточка оружия +10')
+            print('Максимальная заточка оружия +5')
         elif self._character == 'Воин':
             self._weapon = 'Dragon sword'
             print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
             print('Шанс заточить оружие на +1 == 100%, на +2 шанс уже 95%.')
             print('С каждой заточкой шанс уменьшается на 5 % ')
-            print('Максимальная заточка оружия +10')
+            print('Максимальная заточка оружия +5')
         elif self._character == 'Охотник':
             self._weapon = 'Dragon bow'
             print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
             print('Шанс заточить оружие на +1 = 100%, на +2 шанс уже 95%.')
             print('С каждой заточкой шанс уменьшается на 5 % ')
-            print('Максимальная заточка оружия +10')
+            print('Максимальная заточка оружия +5')
         else:
             print("Сначало нужно выбрать класс за кого хотите играть")
 
+
 class WeaponEnhancement(Weapon):
-    pass
+    _lvl_enhancement = 0
+
+    def increase_lvl_weapon(self):
+        if self._lvl_enhancement == 0:
+            if choice_in_percent(100, 'Удачно', 'Неудачно') == 'Удачно':
+                self._lvl_enhancement += 1
+                print(f'\n{self._weapon} +{self._lvl_enhancement}')
+        elif self._lvl_enhancement == 1:
+            if choice_in_percent(95, 'Удачно', 'Неудачно') == 'Удачно':
+                self._lvl_enhancement += 1
+                print(f'\n{self._weapon} +{self._lvl_enhancement}')
+            else:
+                self._lvl_enhancement = 0
+                print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+        elif self._lvl_enhancement == 2:
+            if choice_in_percent(90, 'Удачно', 'Неудачно') == 'Удачно':
+                self._lvl_enhancement += 1
+                print(f'\n{self._weapon} +{self._lvl_enhancement}')
+            else:
+                self._lvl_enhancement = 0
+                print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+        elif self._lvl_enhancement == 3:
+            if choice_in_percent(85, 'Удачно', 'Неудачно') == 'Удачно':
+                self._lvl_enhancement += 1
+                print(f'\n{self._weapon} +{self._lvl_enhancement}')
+            else:
+                self._lvl_enhancement = 0
+                print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+        elif self._lvl_enhancement == 4:
+            if choice_in_percent(80, 'Удачно', 'Неудачно') == 'Удачно':
+                self._lvl_enhancement += 1
+                print(f'\n{self._weapon} +{self._lvl_enhancement}')
+            else:
+                self._lvl_enhancement = 0
+                print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+        else:
+            print(f'Достигнута максимальная заточка оружия +{self._lvl_enhancement}')
 
 
-p1 = Weapon('Sledov')
-p1.mage()
+p1 = WeaponEnhancement('Sledov')
+p1.warrior()
 p1.weapon_selection()
+p1.increase_lvl_weapon()
+p1.increase_lvl_weapon()
+p1.increase_lvl_weapon()
+p1.increase_lvl_weapon()
+p1.increase_lvl_weapon()
+p1.increase_lvl_weapon()
+p1.increase_lvl_weapon()
