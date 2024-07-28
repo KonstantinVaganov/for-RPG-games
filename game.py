@@ -18,8 +18,9 @@ def choice_in_percent(percent, arg1, arg2):
 
 class CharacterClass:
     _character = None
-    _stats = {}
-    _stats_copy = _stats.copy()
+    _stats_mage = {'speed': 19, 'caste_rate': 30, 'magic_attack': 260, 'health': 200}
+    _stats_warrior = {'speed': 18, 'attack_speed': 40, 'attack_power': 200, 'health': 380}
+    _stats_hunter = {'speed': 22, 'attack_speed': 44, 'attack_power': 160, 'health': 230}
     _armor = ''
 
     def __init__(self, name):
@@ -30,8 +31,7 @@ class CharacterClass:
             self._armor = 'robe'
             print(f"\nВы выбрали играть за Мага. Ваш тип брони {self._armor}\n")
             self._character = 'Маг'
-            self._stats.update(speed=19, caste_rate=30, magic_attack=260, health=200)
-            print(f"Ваши статы {self._stats}\n")
+            print(f"Ваши статы {self._stats_mage}\n")
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
@@ -40,8 +40,7 @@ class CharacterClass:
             self._armor = 'heavy'
             print(f"\nВы выбрали играть за Воина. Ваш тип брони {self._armor}\n")
             self._character = 'Воин'
-            self._stats.update(speed=18, attack_speed=40, attack_power=200, health=380)
-            print(f"Ваши статы {self._stats}\n")
+            print(f"Ваши статы {self._stats_warrior}\n")
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
@@ -50,8 +49,7 @@ class CharacterClass:
             self._armor = 'leather'
             print(f"\nВы выбрали играть за Охотника. Ваш тип брони {self._armor}\n")
             self._character = 'Охотник'
-            self._stats.update(speed=22, attack_speed=44, attack_power=160, health=230)
-            print(f"Ваши статы {self._stats}\n")
+            print(f"Ваши статы {self._stats_hunter}\n")
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
@@ -84,7 +82,7 @@ class Weapon(CharacterClass):
 
 class WeaponEnhancement(Weapon):
     _lvl_enhancement = 0
-
+    _stats_none = {}
 
     def increase_lvl_weapon(self):
         if self._lvl_enhancement == 0:
@@ -92,21 +90,37 @@ class WeaponEnhancement(Weapon):
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
                 if self._character == 'Маг':
-                    self._stats['magic_attack'] += 25
+                    self._stats_none = dict(self._stats_mage)
+                    self._stats_mage['magic_attack'] += 30
+                    print(f'Статы персонажа {self._stats_mage}')
+                elif self._character == 'Воин':
+                    self._stats_none = dict(self._stats_warrior)
+                    self._stats_warrior['attack_power'] += 20
+                    print(f'Статы персонажа {self._stats_warrior}')
                 else:
-                    self._stats['attack_power'] += 20
-                print(f'Статы персонажа {self._stats}')
+                    self._stats_none = dict(self._stats_hunter)
+                    self._stats_hunter['attack_power'] += 25
+                    print(f'Статы персонажа {self._stats_hunter}')
         elif self._lvl_enhancement == 1:
             if choice_in_percent(95, 'Удачно', 'Неудачно') == 'Удачно':
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
                 if self._character == 'Маг':
-                    self._stats['magic_attack'] += 25
+                    self._stats_mage['magic_attack'] += 30
+                    print(f'Статы персонажа {self._stats_mage}')
+                elif self._character == 'Воин':
+                    self._stats_warrior['attack_power'] += 20
+                    print(f'Статы персонажа {self._stats_warrior}')
                 else:
-                    self._stats['attack_power'] += 20
-                print(f'Статы персонажа {self._stats}')
+                    self._stats_hunter['attack_power'] += 25
+                    print(f'Статы персонажа {self._stats_hunter}')
             else:
-                self._stats = self._stats_copy.copy()
+                if self._character == 'Маг':
+                    self._stats_mage = dict(self._stats_none)
+                elif self._character == 'Воин':
+                    self._stats_warrior = dict(self._stats_none)
+                else:
+                    self._stats_hunter = dict(self._stats_none)
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         elif self._lvl_enhancement == 2:
@@ -114,12 +128,21 @@ class WeaponEnhancement(Weapon):
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
                 if self._character == 'Маг':
-                    self._stats['magic_attack'] += 25
+                    self._stats_mage['magic_attack'] += 30
+                    print(f'Статы персонажа {self._stats_mage}')
+                elif self._character == 'Воин':
+                    self._stats_warrior['attack_power'] += 20
+                    print(f'Статы персонажа {self._stats_warrior}')
                 else:
-                    self._stats['attack_power'] += 20
-                print(f'Статы персонажа {self._stats}')
+                    self._stats_hunter['attack_power'] += 25
+                    print(f'Статы персонажа {self._stats_hunter}')
             else:
-                self._stats = self._stats_copy.copy()
+                if self._character == 'Маг':
+                    self._stats_mage = dict(self._stats_none)
+                elif self._character == 'Воин':
+                    self._stats_warrior = dict(self._stats_none)
+                else:
+                    self._stats_hunter = dict(self._stats_none)
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         elif self._lvl_enhancement == 3:
@@ -127,12 +150,21 @@ class WeaponEnhancement(Weapon):
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
                 if self._character == 'Маг':
-                    self._stats['magic_attack'] += 25
+                    self._stats_mage['magic_attack'] += 30
+                    print(f'Статы персонажа {self._stats_mage}')
+                elif self._character == 'Воин':
+                    self._stats_warrior['attack_power'] += 20
+                    print(f'Статы персонажа {self._stats_warrior}')
                 else:
-                    self._stats['attack_power'] += 20
-                print(f'Статы персонажа {self._stats}')
+                    self._stats_hunter['attack_power'] += 25
+                    print(f'Статы персонажа {self._stats_hunter}')
             else:
-                self._stats = self._stats_copy.copy()
+                if self._character == 'Маг':
+                    self._stats_mage = dict(self._stats_none)
+                elif self._character == 'Воин':
+                    self._stats_warrior = dict(self._stats_none)
+                else:
+                    self._stats_hunter = dict(self._stats_none)
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         elif self._lvl_enhancement == 4:
@@ -140,12 +172,21 @@ class WeaponEnhancement(Weapon):
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
                 if self._character == 'Маг':
-                    self._stats['magic_attack'] += 25
+                    self._stats_mage['magic_attack'] += 30
+                    print(f'Статы персонажа {self._stats_mage}')
+                elif self._character == 'Воин':
+                    self._stats_warrior['attack_power'] += 20
+                    print(f'Статы персонажа {self._stats_warrior}')
                 else:
-                    self._stats['attack_power'] += 20
-                print(f'Статы персонажа {self._stats}')
+                    self._stats_hunter['attack_power'] += 25
+                    print(f'Статы персонажа {self._stats_hunter}')
             else:
-                self._stats = self._stats_copy.copy()
+                if self._character == 'Маг':
+                    self._stats_mage = dict(self._stats_none)
+                elif self._character == 'Воин':
+                    self._stats_warrior = dict(self._stats_none)
+                else:
+                    self._stats_hunter = dict(self._stats_none)
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         else:
@@ -153,7 +194,7 @@ class WeaponEnhancement(Weapon):
 
 
 p1 = WeaponEnhancement('Player')
-p1.mage()
+p1.hunter()
 p1.weapon_selection()
 p1.increase_lvl_weapon()
 p1.increase_lvl_weapon()
