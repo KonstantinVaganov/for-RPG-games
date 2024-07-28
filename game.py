@@ -19,6 +19,7 @@ def choice_in_percent(percent, arg1, arg2):
 class CharacterClass:
     _character = None
     _stats = {}
+    _stats_copy = _stats.copy()
     _armor = ''
 
     def __init__(self, name):
@@ -84,47 +85,76 @@ class Weapon(CharacterClass):
 class WeaponEnhancement(Weapon):
     _lvl_enhancement = 0
 
+
     def increase_lvl_weapon(self):
         if self._lvl_enhancement == 0:
             if choice_in_percent(100, 'Удачно', 'Неудачно') == 'Удачно':
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
+                if self._character == 'Маг':
+                    self._stats['magic_attack'] += 25
+                else:
+                    self._stats['attack_power'] += 20
+                print(f'Статы персонажа {self._stats}')
         elif self._lvl_enhancement == 1:
             if choice_in_percent(95, 'Удачно', 'Неудачно') == 'Удачно':
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
+                if self._character == 'Маг':
+                    self._stats['magic_attack'] += 25
+                else:
+                    self._stats['attack_power'] += 20
+                print(f'Статы персонажа {self._stats}')
             else:
+                self._stats = self._stats_copy.copy()
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         elif self._lvl_enhancement == 2:
             if choice_in_percent(90, 'Удачно', 'Неудачно') == 'Удачно':
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
+                if self._character == 'Маг':
+                    self._stats['magic_attack'] += 25
+                else:
+                    self._stats['attack_power'] += 20
+                print(f'Статы персонажа {self._stats}')
             else:
+                self._stats = self._stats_copy.copy()
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         elif self._lvl_enhancement == 3:
             if choice_in_percent(85, 'Удачно', 'Неудачно') == 'Удачно':
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
+                if self._character == 'Маг':
+                    self._stats['magic_attack'] += 25
+                else:
+                    self._stats['attack_power'] += 20
+                print(f'Статы персонажа {self._stats}')
             else:
+                self._stats = self._stats_copy.copy()
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         elif self._lvl_enhancement == 4:
             if choice_in_percent(80, 'Удачно', 'Неудачно') == 'Удачно':
                 self._lvl_enhancement += 1
                 print(f'\n{self._weapon} +{self._lvl_enhancement}')
+                if self._character == 'Маг':
+                    self._stats['magic_attack'] += 25
+                else:
+                    self._stats['attack_power'] += 20
+                print(f'Статы персонажа {self._stats}')
             else:
+                self._stats = self._stats_copy.copy()
                 self._lvl_enhancement = 0
                 print(f'К сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
         else:
             print(f'Достигнута максимальная заточка оружия +{self._lvl_enhancement}')
 
 
-p1 = WeaponEnhancement('Sledov')
-p1.warrior()
+p1 = WeaponEnhancement('Player')
+p1.mage()
 p1.weapon_selection()
-p1.increase_lvl_weapon()
 p1.increase_lvl_weapon()
 p1.increase_lvl_weapon()
 p1.increase_lvl_weapon()
