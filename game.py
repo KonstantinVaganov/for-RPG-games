@@ -2,10 +2,10 @@ import random
 
 
 def choice_in_percent(percent, arg1, arg2):
-    ''' Для работы нужно импортировать модуль random.
+    """ Для работы нужно импортировать модуль random.
         percent = указать проценты
         arg1 = с шансом (percent) выпадет arg1
-        arg2 = с шансом (100 - percent) выпадет arg2 '''
+        arg2 = с шансом (100 - percent) выпадет arg2 """
     full = 100
     result = []
     full -= percent
@@ -17,6 +17,7 @@ def choice_in_percent(percent, arg1, arg2):
 
 
 class CharacterClass:
+    """ Класс для выбора кем играть """
     _character = None
     _armor = ''
     _weapon = ''
@@ -73,65 +74,39 @@ class Weapon(CharacterClass):
 
 
 class WeaponEnhancement(Weapon):
+    """ Класс для улучшения оружия """
     _lvl_enhancement = 0
     _stats_none = {}
 
-    def __logic_up_lvl_weapon(self):
-        pass
+    def __logic_up_lvl_weapon(self, chance):
+        if choice_in_percent(percent=chance, arg1='Удачно', arg2='Неудачно') == 'Удачно':
+            self._lvl_enhancement += 1
+            print(f'\n{self._weapon} +{self._lvl_enhancement}')
+            self._stats_character[self._up_stats_character[0]] += self._up_stats_character[1]
+            print(f'Статы персонажа {self._stats_character}')
+        else:
+            self._stats_character = dict(self._stats_none)
+            self._lvl_enhancement = 0
+            print(f'\nК сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+
     def increase_lvl_weapon(self):
         if self._lvl_enhancement == 0:
-            if choice_in_percent(100, 'Удачно', 'Неудачно') == 'Удачно':
-                self._lvl_enhancement += 1
-                print(f'\n{self._weapon} +{self._lvl_enhancement}')
-                self._stats_none = dict(self._stats_character)
-                self._stats_character[self._up_stats_character[0]] += self._up_stats_character[1]
-                print(f'Статы персонажа {self._stats_character}')
+            self._stats_none = dict(self._stats_character)
+            self.__logic_up_lvl_weapon(100)
         elif self._lvl_enhancement == 1:
-            if choice_in_percent(95, 'Удачно', 'Неудачно') == 'Удачно':
-                self._lvl_enhancement += 1
-                print(f'\n{self._weapon} +{self._lvl_enhancement}')
-                self._stats_character[self._up_stats_character[0]] += self._up_stats_character[1]
-                print(f'Статы персонажа {self._stats_character}')
-            else:
-                self._stats_character = dict(self._stats_none)
-                self._lvl_enhancement = 0
-                print(f'\nК сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+            self.__logic_up_lvl_weapon(95)
         elif self._lvl_enhancement == 2:
-            if choice_in_percent(90, 'Удачно', 'Неудачно') == 'Удачно':
-                self._lvl_enhancement += 1
-                print(f'\n{self._weapon} +{self._lvl_enhancement}')
-                self._stats_character[self._up_stats_character[0]] += self._up_stats_character[1]
-                print(f'Статы персонажа {self._stats_character}')
-            else:
-                self._stats_character = dict(self._stats_none)
-                self._lvl_enhancement = 0
-                print(f'\nК сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+            self.__logic_up_lvl_weapon(90)
         elif self._lvl_enhancement == 3:
-            if choice_in_percent(85, 'Удачно', 'Неудачно') == 'Удачно':
-                self._lvl_enhancement += 1
-                print(f'\n{self._weapon} +{self._lvl_enhancement}')
-                self._stats_character[self._up_stats_character[0]] += self._up_stats_character[1]
-                print(f'Статы персонажа {self._stats_character}')
-            else:
-                self._stats_character = dict(self._stats_none)
-                self._lvl_enhancement = 0
-                print(f'\nК сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+            self.__logic_up_lvl_weapon(85)
         elif self._lvl_enhancement == 4:
-            if choice_in_percent(80, 'Удачно', 'Неудачно') == 'Удачно':
-                self._lvl_enhancement += 1
-                print(f'\n{self._weapon} +{self._lvl_enhancement}')
-                self._stats_character[self._up_stats_character[0]] += self._up_stats_character[1]
-                print(f'Статы персонажа {self._stats_character}')
-            else:
-                self._stats_character = dict(self._stats_none)
-                self._lvl_enhancement = 0
-                print(f'\nК сожилению заточка не удалась, уровень заточки спадает до {self._lvl_enhancement}')
+            self.__logic_up_lvl_weapon(80)
         else:
             print(f'Достигнута максимальная заточка оружия +{self._lvl_enhancement}')
 
 
 p1 = WeaponEnhancement('Player')
-p1.hunter()
+p1.mage()
 p1.weapon_selection()
 p1.increase_lvl_weapon()
 p1.increase_lvl_weapon()
