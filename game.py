@@ -22,6 +22,7 @@ class CharacterClass:
     _stats_warrior = {'speed': 18, 'attack_speed': 40, 'attack_power': 200, 'health': 380}
     _stats_hunter = {'speed': 22, 'attack_speed': 44, 'attack_power': 160, 'health': 230}
     _armor = ''
+    _weapon = ''
 
     def __init__(self, name):
         self.name = name
@@ -32,6 +33,7 @@ class CharacterClass:
             print(f"\nВы выбрали играть за Мага. Ваш тип брони {self._armor}\n")
             self._character = 'Маг'
             print(f"Ваши статы {self._stats_mage}\n")
+            self._weapon = 'Dragon mace'
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
@@ -41,6 +43,7 @@ class CharacterClass:
             print(f"\nВы выбрали играть за Воина. Ваш тип брони {self._armor}\n")
             self._character = 'Воин'
             print(f"Ваши статы {self._stats_warrior}\n")
+            self._weapon = 'Dragon sword'
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
@@ -50,34 +53,18 @@ class CharacterClass:
             print(f"\nВы выбрали играть за Охотника. Ваш тип брони {self._armor}\n")
             self._character = 'Охотник'
             print(f"Ваши статы {self._stats_hunter}\n")
+            self._weapon = 'Dragon bow'
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
 
 class Weapon(CharacterClass):
-    _weapon = ''
 
     def weapon_selection(self):
-        if self._character == 'Маг':
-            self._weapon = 'Dragon mace'
-            print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
-            print('Шанс заточить оружие на +1 == 100%, на +2 шанс уже 95%.')
-            print('С каждой заточкой шанс уменьшается на 5 % ')
-            print('Максимальная заточка оружия +5')
-        elif self._character == 'Воин':
-            self._weapon = 'Dragon sword'
-            print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
-            print('Шанс заточить оружие на +1 == 100%, на +2 шанс уже 95%.')
-            print('С каждой заточкой шанс уменьшается на 5 % ')
-            print('Максимальная заточка оружия +5')
-        elif self._character == 'Охотник':
-            self._weapon = 'Dragon bow'
-            print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
-            print('Шанс заточить оружие на +1 = 100%, на +2 шанс уже 95%.')
-            print('С каждой заточкой шанс уменьшается на 5 % ')
-            print('Максимальная заточка оружия +5')
-        else:
-            print("Сначало нужно выбрать класс за кого хотите играть")
+        print(f'Ваше оружие {self._weapon}, Оружие можно заточить, при каждой заточки статы увеличиваются. ')
+        print('Шанс заточить оружие на +1 == 100%, на +2 шанс уже 95%.')
+        print('С каждой заточкой шанс уменьшается на 5 % ')
+        print('Максимальная заточка оружия +5')
 
 
 class WeaponEnhancement(Weapon):
