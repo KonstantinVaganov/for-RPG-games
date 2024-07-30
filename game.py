@@ -18,11 +18,10 @@ def choice_in_percent(percent, arg1, arg2):
 
 class CharacterClass:
     _character = None
-    _stats_mage = {'speed': 19, 'caste_rate': 30, 'magic_attack': 260, 'health': 200}
-    _stats_warrior = {'speed': 18, 'attack_speed': 40, 'attack_power': 200, 'health': 380}
-    _stats_hunter = {'speed': 22, 'attack_speed': 44, 'attack_power': 160, 'health': 230}
     _armor = ''
     _weapon = ''
+    _stats_character = {}
+    _up_stats_character = []
 
     def __init__(self, name):
         self.name = name
@@ -30,30 +29,36 @@ class CharacterClass:
     def mage(self):
         if self._character is None:
             self._armor = 'robe'
-            print(f"\nВы выбрали играть за Мага. Ваш тип брони {self._armor}\n")
-            self._character = 'Маг'
-            print(f"Ваши статы {self._stats_mage}\n")
             self._weapon = 'Dragon mace'
+            self._character = 'Маг'
+            self._stats_character = {'speed': 19, 'caste_rate': 30, 'magic_attack': 260, 'health': 200}
+            self._up_stats_character = ['magic_attack', 'health']
+            print(f"\nВы выбрали играть за Мага. Ваш тип брони {self._armor}\n")
+            print(f"Ваши статы {self._stats_character}\n")
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
     def warrior(self):
         if self._character is None:
             self._armor = 'heavy'
-            print(f"\nВы выбрали играть за Воина. Ваш тип брони {self._armor}\n")
-            self._character = 'Воин'
-            print(f"Ваши статы {self._stats_warrior}\n")
             self._weapon = 'Dragon sword'
+            self._character = 'Воин'
+            self._stats_character = {'speed': 18, 'attack_speed': 40, 'attack_power': 200, 'health': 380}
+            self._up_stats_character = ['attack_power', 'health']
+            print(f"\nВы выбрали играть за Воина. Ваш тип брони {self._armor}\n")
+            print(f"Ваши статы {self._stats_character}\n")
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
     def hunter(self):
         if self._character is None:
             self._armor = 'leather'
-            print(f"\nВы выбрали играть за Охотника. Ваш тип брони {self._armor}\n")
-            self._character = 'Охотник'
-            print(f"Ваши статы {self._stats_hunter}\n")
             self._weapon = 'Dragon bow'
+            self._character = 'Охотник'
+            self._stats_character = {'speed': 22, 'attack_speed': 44, 'attack_power': 160, 'health': 230}
+            self._up_stats_character = ['attack_power', 'health']
+            print(f"\nВы выбрали играть за Охотника. Ваш тип брони {self._armor}\n")
+            print(f"Ваши статы {self._stats_character}\n")
         else:
             print(f'Вы уже выбрали класс {self._character}a')
 
